@@ -1,0 +1,12 @@
+<?php
+
+use App\Http\Controllers\Api\UserController;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+Route::prefix('v1')->group(function () {
+
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
+
+});
