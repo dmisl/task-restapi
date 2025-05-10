@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Position;
+use Faker\Factory as FakerFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -14,12 +15,20 @@ class UserFactory extends Factory
 {
     public function definition(): array
     {
+        $faker = FakerFactory::create('uk_UA');
+
+        $domains = [
+            'gmail.com', 'ukr.net'
+        ];
+
+        $ukrName = $faker->name('uk_UA');
+
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'phone' => '+380' . $this->faker->numerify('#######'),
+            'name' => Str::slug($ukrName, ' '),
+            'email' => Str::slug($ukrName, '_').rand(1000, 9999)."@".$domains[array_rand($domains)],
+            'phone' => '+380' . $faker->numerify('#########'),
             'position_id' => Position::all()->random()->id,
-            'photo' => $this->faker->imageUrl(100, 100, 'people'),
+            'photo' => 'https://i.pravatar.cc/100?img=' . rand(1, 70),
         ];
     }
 }
