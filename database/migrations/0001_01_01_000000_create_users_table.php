@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string('phone');
             $table->unsignedBigInteger('position_id');
             $table->string('photo');
-
-            $table->foreign('position_id')->references('id')->on('positions')->onDelete('cascade');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
