@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserIndexRequest;
 use App\Http\Resources\ApiResource;
+use App\Service\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

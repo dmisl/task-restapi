@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -17,4 +17,9 @@ class User extends Authenticatable
     protected $casts = [
         'position_id' => 'integer',
     ];
+
+    public function position(): BelongsTo
+    {
+        return $this->belongsTo(Position::class);
+    }
 }
