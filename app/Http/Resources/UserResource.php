@@ -16,7 +16,7 @@ class UserResource extends JsonResource
             'phone' => $this->phone,
             'position' => $this->position->name,
             'position_id' => $this->position_id,
-            'registration_timestamp' => $this->created_at,
+            'registration_timestamp' => $this->created_at->timestamp,
             'photo' => $this->photo
         ];
     }
