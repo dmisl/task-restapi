@@ -14,11 +14,16 @@ class UserIndexResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $paginator = UserResource::collection($this->resource['users']);
         return [
             'success' => true,
-            'page' => $this->resource['page'],
-            'count' => $this->resource['count'],
-            'users' => UserResource::collection($this->resource['users'])
+            'page' => $paginator->currentPage(),
+            'total_pages' => $paginator->lastPage(),
+            'total_users' => $paginator->total(),
+            'count' => $paginator->perPage(),
+            'next_url' => $paginator->nextPageUrl() ? $paginator->nextPageUrl()."&count={$paginator->perPage()}" : null,
+            'prev_url' => $paginator->previousPageUrl() ? $paginator->previousPageUrl()."&count={$paginator->perPage()}" : null,
+            'users' => $paginator,
         ];
     }
 }

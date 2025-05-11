@@ -25,9 +25,7 @@ class UserController extends Controller
         $users = $this->userService->getPaginatedUsers($request->count ?? 5, $request->page ?? 1);
 
         return response()->json(new UserIndexResource([
-            'page' => $request->page ?? 1,
-            'count' => $request->count ?? 5,
             'users' => $users
-        ]));
+        ]), 200);
     }
 }
