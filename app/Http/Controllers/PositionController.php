@@ -16,6 +16,8 @@ class PositionController extends Controller
 
     public function index()
     {
-        
+        return response()->json([
+            'positions' => $this->positionService->getPositions(),
+        ]);
     }
 }
