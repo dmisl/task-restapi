@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PositionIndexResource;
 use App\Services\PositionService;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,8 @@ class PositionController extends Controller
 
     public function index()
     {
-        return response()->json([
-            'positions' => $this->positionService->getPositions(),
-        ]);
+        return response()->json(new PositionIndexResource([
+            'positions' => $this->positionService->getAll()
+        ]), 200);
     }
 }
