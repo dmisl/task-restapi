@@ -24,4 +24,21 @@ class UserService
 
         return $paginator;
     }
+
+    public function getUser($id)
+    {
+        $user = User::find($id);
+
+        if(!$user)
+        {
+            throw new HttpResponseException(
+                response()->json([
+                    'success' => false,
+                    'message' => 'User not found',
+                ], 404)
+            );
+        }
+
+        return $user;
+    }
 }

@@ -33,6 +33,6 @@ class UserController extends Controller
 
     public function show(UserShowRequest $request, $id)
     {
-
+        $user = $this->userService->getUser($id);
     }
 }
