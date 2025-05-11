@@ -7,6 +7,8 @@ use App\Http\Requests\UserIndexRequest;
 use App\Http\Requests\UserShowRequest;
 use App\Http\Resources\ApiResource;
 use App\Http\Resources\UserIndexResource;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\UserShowResource;
 use App\Models\User;
 use App\Service\UserService;
 use Illuminate\Http\JsonResponse;
@@ -34,5 +36,7 @@ class UserController extends Controller
     public function show(UserShowRequest $request, $id)
     {
         $user = $this->userService->getUser($id);
+
+        return response()->json(new UserShowResource($user), 200);
     }
 }
