@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserIndexRequest;
+use App\Http\Requests\UserShowRequest;
 use App\Http\Resources\ApiResource;
 use App\Http\Resources\UserIndexResource;
+use App\Models\User;
 use App\Service\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -27,5 +29,10 @@ class UserController extends Controller
         return response()->json(new UserIndexResource([
             'users' => $users
         ]), 200);
+    }
+
+    public function show(UserShowRequest $request, $id)
+    {
+
     }
 }
