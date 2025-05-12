@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserIndexRequest;
 use App\Http\Requests\UserShowRequest;
+use App\Http\Requests\UserStoreRequest;
 use App\Http\Resources\UserIndexResource;
 use App\Http\Resources\UserShowResource;
 use App\Services\UserService;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -35,8 +37,11 @@ class UserController extends Controller
         return response()->json(new UserShowResource($user), 200);
     }
 
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        dd($request->all());
+        return response()->json([
+            'success' => true,
+            'required' => $request->all()
+        ]);
     }
 }
