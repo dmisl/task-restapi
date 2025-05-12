@@ -14,6 +14,9 @@
         <input name="phone" placeholder="phone">
         <input name="email" placeholder="email">
         <input type="file" name="photo">
+        <select name="position_id">
+            
+        </select>
 
         <button type="submit">send</button>
 
