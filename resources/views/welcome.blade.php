@@ -12,6 +12,7 @@
 
         <input name="name" placeholder="name">
         <input name="phone" placeholder="phone">
+        <input name="email" placeholder="email">
 
         <button type="submit">send</button>
 
