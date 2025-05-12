@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('registration_tokens', function (Blueprint $table) {
             $table->text('token')->unique();
-            $table->boolean('used')->default('false');
+            $table->boolean('used')->default(false);
             $table->timestamp('expires_at');
         });
     }

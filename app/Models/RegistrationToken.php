@@ -9,4 +9,6 @@ class RegistrationToken extends Model
     protected $fillable = [
         'token', 'used', 'expires_at'
     ];
+
+    public $timestamps = false;
 }
