@@ -17,7 +17,7 @@ return new class extends Migration
 
             $table->string('name', 60);
             $table->string('email')->unique();
-            $table->string('phone');
+            $table->string('phone')->unique();
             $table->unsignedBigInteger('position_id');
             $table->string('photo');
         });
