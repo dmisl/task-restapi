@@ -19,6 +19,7 @@
                 <input name="phone" placeholder="phone">
                 <input name="email" placeholder="email">
                 <input type="file" name="photo">
+                <p class="m-0 p-0" style="height: 5px;">position id</p>
                 <select name="position_id">
                     @foreach ($positions as $position)
                         <option value="{{ $position->id }}">{{ $position->id }} - {{ $position->name }}</option>
