@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\RegistrationToken;
 use App\Models\User;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\UploadedFile;
@@ -63,25 +64,35 @@ class UserService
         if(isset($data['token']) || $token)
         {
             $token = isset($data['token']) ? $data['token'] : $token;
-            return response()->json([
-                'token' => $token
-            ]);
+            $token = RegistrationToken::query()->where(['token' => $token])->where(['used' => 0])->where('expires_at', '>=', now())->first();
+            if($token)
+            {
+                User::create([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'phone' => $data['phone'],
+                    'position_id' => $data['position_id'],
+                    'photo' => $this->proceedImage($data['photo']),
+                ]);
+                $token->update(['used' => 1]);
+            } else
+            {
+                throw new HttpResponseException(
+                    response()->json([
+                        'success' => false,
+                        'message' => 'The token expired'
+                    ], 401)
+                );
+            }
         } else
         {
             throw new HttpResponseException(
                 response()->json([
                     'success' => false,
-                    'message' => 'The token expired'
+                    'message' => 'Invalid token. Try to get a new one by the method GET api/v1/token.'
                 ], 401)
             );
         }
-        User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'phone' => $data['phone'],
-            'position_id' => $data['position_id'],
-            'photo' => $this->proceedImage($data['photo']),
-        ]);
     }
 
     public function proceedImage(UploadedFile $image)
