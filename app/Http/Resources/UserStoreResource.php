@@ -16,7 +16,7 @@ class UserStoreResource extends JsonResource
     {
         return [
             'success' => true,
-            'used_id' => $this->userId,
+            'used_id' => $this->resource['userId'],
             'message' => 'New user successfully registered'
         ];
     }
