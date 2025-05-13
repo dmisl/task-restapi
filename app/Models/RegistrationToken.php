@@ -11,4 +11,7 @@ class RegistrationToken extends Model
     ];
 
     public $timestamps = false;
+    protected $primaryKey = 'token';
+    public $incrementing = false;
+    protected $keyType = 'string';
 }

@@ -67,7 +67,7 @@ class UserService
             $token = RegistrationToken::query()->where(['token' => $token])->where(['used' => 0])->where('expires_at', '>=', now())->first();
             if($token)
             {
-                User::create([
+                $user = User::create([
                     'name' => $data['name'],
                     'email' => $data['email'],
                     'phone' => $data['phone'],
@@ -75,6 +75,7 @@ class UserService
                     'photo' => $this->proceedImage($data['photo']),
                 ]);
                 $token->update(['used' => 1]);
+                return $user->id;
             } else
             {
                 throw new HttpResponseException(

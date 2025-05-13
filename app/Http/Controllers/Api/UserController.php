@@ -8,6 +8,7 @@ use App\Http\Requests\UserShowRequest;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Resources\UserIndexResource;
 use App\Http\Resources\UserShowResource;
+use App\Http\Resources\UserStoreResource;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Validator;
 
@@ -39,10 +40,7 @@ class UserController extends Controller
 
     public function store(UserStoreRequest $request)
     {
-        return $this->userService->create($request->all(), $request->header('token'));
-        return response()->json([
-            'success' => true,
-            'required' => $request->all()
-        ]);
+        $newUserId = $this->userService->create($request->all(), $request->header('token'));
+        return response()->json(new UserStoreResource(['userId' => $newUserId]));
     }
 }
