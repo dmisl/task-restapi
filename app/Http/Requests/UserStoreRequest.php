@@ -19,9 +19,10 @@ class UserStoreRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'min:2', 'max:60'],
             'email' => ['required', new RFC2822],
-            'phone' => ['required', 'string', 'starts_with:+380'],
+            // 'phone' => ['required', 'string', 'starts_with:+380'],
             'position_id' => ['required', 'integer', 'exists:positions,id'],
-            'photo' => ['required', 'file', 'mimes:jpeg,jpg', 'max:5120', 'dimensions:min_width=70,min_height=70'],
+            // 'photo' => ['required', 'file', 'mimes:jpeg,jpg', 'max:5120', 'dimensions:min_width=70,min_height=70'],
+            'token' => ['nullable', 'string']
         ];
     }
 

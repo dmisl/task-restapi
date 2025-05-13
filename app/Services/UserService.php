@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Tinify\Client;
 use Tinify\Tinify;
@@ -14,6 +15,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\Drivers\Gd\Encoders\JpegEncoder;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageManager;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserService
 {
@@ -54,6 +56,32 @@ class UserService
         }
 
         return $user;
+    }
+
+    public function create(array $data, string|null $token = '')
+    {
+        if(isset($data['token']) || $token)
+        {
+            $token = isset($data['token']) ? $data['token'] : $token;
+            return response()->json([
+                'token' => $token
+            ]);
+        } else
+        {
+            throw new HttpResponseException(
+                response()->json([
+                    'success' => false,
+                    'message' => 'The token expired'
+                ], 401)
+            );
+        }
+        User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'position_id' => $data['position_id'],
+            'photo' => $this->proceedImage($data['photo']),
+        ]);
     }
 
     public function proceedImage(UploadedFile $image)

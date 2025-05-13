@@ -39,7 +39,7 @@ class UserController extends Controller
 
     public function store(UserStoreRequest $request)
     {
-        dd($this->userService->proceedImage($request->photo));
+        return $this->userService->create($request->all(), $request->header('token'));
         return response()->json([
             'success' => true,
             'required' => $request->all()
