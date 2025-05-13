@@ -6,6 +6,8 @@ use App\Models\Position;
 use Faker\Factory as FakerFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 /**
@@ -22,6 +24,14 @@ class UserFactory extends Factory
         ];
 
         $ukrName = $faker->name('uk_UA');
+
+        $url = basename('https://i.pravatar.cc/100?img=' . rand(1, 70));
+
+        // $response = Http::get($url);
+
+        // $path = 'photos/'.bin2hex(random_bytes(8)).$url;
+
+        // Storage::disk('public')->put($path, $response->body());
 
         return [
             'name' => Str::slug($ukrName, ' '),
