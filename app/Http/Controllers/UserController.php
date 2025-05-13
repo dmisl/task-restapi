@@ -17,9 +17,9 @@ class UserController extends Controller
         $this->positionService = $positionService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = $this->userService->getAll();
+        $users = $this->userService->getPaginatedUsers(6, $request->page ? $request->page : 1);
         $positions = $this->positionService->getAll();
 
         return view('index', compact('users', 'positions'));
