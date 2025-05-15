@@ -25,7 +25,7 @@ class UserFactory extends Factory
 
         $ukrName = $faker->name('uk_UA');
 
-        $url = basename('https://i.pravatar.cc/100?img=' . rand(1, 70));
+        // $url = basename('https://i.pravatar.cc/100?img=' . rand(1, 70));
 
         // $response = Http::get($url);
 
